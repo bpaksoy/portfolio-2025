@@ -1,0 +1,362 @@
+'use client';
+
+import { motion, Variants } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCode, FaCloud, FaDatabase, FaTools } from 'react-icons/fa';
+import ThreeBackground from './components/ThreeBackground'; // Import the 3D background
+
+// --- ANIMATION SETTINGS ---
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: "easeOut" } 
+  }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+export default function Home() {
+  return (
+    <div className="min-h-screen text-slate-200 font-sans selection:bg-purple-500 selection:text-white relative">
+      
+      {/* 1. THE 3D BACKGROUND (Fixed behind everything) */}
+      <ThreeBackground />
+
+      <main className="max-w-5xl mx-auto px-6 py-20 space-y-24 relative z-10">
+
+        {/* --- HERO SECTION --- */}
+        <header className="text-center space-y-6 pt-10">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUp}
+          >
+            {/* Glowing Name Effect */}
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 drop-shadow-lg">
+              Banu Paksoy
+            </h1>
+            <h2 className="text-xl md:text-2xl font-light text-slate-300 mb-6">
+              Full-Stack Developer <span className="text-purple-400">/</span> Next.js <span className="text-purple-400">/</span> AI
+            </h2>
+            
+            <div className="flex justify-center items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest">
+              <FaMapMarkerAlt />
+              <span>Fort Lee, NJ | Remote Ready</span>
+            </div>
+
+            <div className="flex justify-center gap-6">
+              <SocialBtn href="https://github.com/bpaksoy" icon={<FaGithub />} />
+              <SocialBtn href="https://www.linkedin.com/in/banu-paksoy-1420a346/" icon={<FaLinkedin />} />
+              <SocialBtn href="mailto:paksoybanu83@gmail.com" icon={<FaEnvelope />} />
+            </div>
+          </motion.div>
+        </header>
+
+        {/* --- SUMMARY SECTION (Glass Card) --- */}
+        <motion.section 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={fadeInUp}
+          className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl"
+        >
+          <p className="text-lg md:text-xl leading-relaxed text-slate-300 font-light">
+            I am a <strong className="text-white">Full-Stack Architect</strong> specializing in scalable applications. 
+            I build production-grade systems using <strong className="text-blue-400">Next.js</strong> and <strong className="text-purple-400">NestJS</strong> on 
+            <strong className="text-yellow-400"> Google Cloud</strong>. 
+            Recently, I architected and built the e-commerce platform for <em className="text-white not-italic">Mobility on Demand</em>. 
+            I am now pushing the boundaries of <strong className="text-pink-400">Generative AI</strong> integration.
+          </p>
+        </motion.section>
+
+        {/* --- SKILLS GRID --- */}
+        <motion.section 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={staggerContainer}
+        >
+          <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+            <FaTools className="text-purple-400 text-xl" />
+            <h2 className="text-2xl font-bold text-white">Tech Stack</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <SkillCard title="Front-End" icon={<FaCode />} skills={['React', 'Next.js', 'TypeScript', 'Tailwind', 'Framer Motion']} />
+            <SkillCard title="Back-End" icon={<FaDatabase />} skills={['Node.js', 'NestJS', 'Python', 'PostgreSQL', 'Django']} />
+            <SkillCard title="Cloud & AI" icon={<FaCloud />} skills={['GCP', 'Azure AI', 'Gemini API', 'Docker', 'CI/CD']} />
+            <SkillCard title="Workflow" icon={<FaTools />} skills={['Git', 'Figma', 'VS Code', 'Jira', 'Postman']} />
+          </div>
+        </motion.section>
+
+        {/* --- PROJECTS SECTION --- */}
+        <section>
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true }} 
+            variants={fadeInUp}
+            className="flex items-center gap-3 mb-10 border-b border-white/10 pb-4"
+          >
+            <FaCode className="text-purple-400 text-xl" />
+            <h2 className="text-2xl font-bold text-white">Featured Work</h2>
+          </motion.div>
+
+          <div className="space-y-12">
+            
+            {/* Project 1 */}
+            <ProjectCard 
+              title="Mobility on Demand"
+              subtitle="E-Commerce & Delivery Platform"
+              badge="Flagship"
+              stack={['Next.js', 'NestJS', 'GCP', 'PostgreSQL']}
+              description="Solely built and deployed a production-grade e-commerce platform on Google Cloud. Integrated Autofleet API for real-time dispatching and automated order workflows."
+              link="https://shop.mod.group/"
+              linkText="Visit Live App"
+              color="blue"
+            />
+
+            {/* Project 2 */}
+            <ProjectCard 
+              title="Profi Deutsch"
+              subtitle="AI Language Agent"
+              badge="AI / LLM"
+              stack={['Gemini API', 'Azure Speech', 'Python', 'React']}
+              description="A 'live-in' AI tutor. Uses Google Gemini for logic and Azure for realistic voice synthesis to teach German."
+              link="https://github.com/bpaksoy/profi-deutsch-app-2"
+              linkText="View Code"
+              color="purple"
+            />
+
+             {/* Project 3 */}
+             <ProjectCard 
+              title="Urbanitus Magazine"
+              subtitle="Digital Publication"
+              role="Front-End"
+              stack={['WordPress', 'React', 'Analytics']}
+              description="Redesigned a high-traffic magazine, implementing custom analytics to boost reader engagement."
+              link="https://urbanitus.com"
+              linkText="Visit Site"
+              color="pink"
+            />
+
+          </div>
+        </section>
+
+        {/* --- EXPERIENCE --- */}
+        <motion.section 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={fadeInUp}
+        >
+          <h2 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">Professional History</h2>
+          <div className="space-y-10">
+            
+            {/* MOD - The New Description */}
+            <ExperienceItem 
+              role="Full Stack Developer" 
+              company="Mobility on Demand" 
+              date="Feb 2025 – Present"
+              points={[
+                "Solely built and deployed a scalable e-commerce platform on Google Cloud Platform (GCP) using Next.js and NestJS.",
+                "Developed the 'intermediate stops' feature for the cross-platform mobile app (Expo + React Native), handling UI, state management, and backend API logic.",
+                "Extended backend routing and scheduling algorithms to support multi-stop itineraries with dynamic price and time estimations.",
+                "Improved end-user flexibility, directly increasing the value of premium rides by enabling customizable journeys."
+              ]}
+            />
+
+            <ExperienceItem 
+              role="Front-End Web Developer" 
+              company="Urbanitus Magazine" 
+              date="Oct 2019 – Feb 2025"
+              points={[
+                "Led the digital redesign of a high-traffic magazine using WordPress and React.",
+                "Boosted reader engagement through analytics-driven UI optimization and improved site load performance."
+              ]}
+            />
+
+             <ExperienceItem 
+              role="Teaching Assistant" 
+              company="CUNY Hunter College" 
+              date="May 2018 – Jun 2018"
+              points={[
+                "Supported 2X Tech Talent Pipeline bootcamp students in learning JavaScript, React, and SQLite.",
+                "Mentored underrepresented students entering the NYC tech industry."
+              ]}
+            />
+          </div>
+        </motion.section>
+
+        {/* --- EDUCATION SECTION --- */}
+        <motion.section 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true }} 
+          variants={fadeInUp}
+        >
+          <h2 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">Education</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <EducationCard 
+              school="Harvard University"
+              degree="CS50 Web Programming with Python & JavaScript"
+              year="2023 – 2024"
+              icon="🎓"
+            />
+            
+            <EducationCard 
+              school="Galvanize / Hack Reactor"
+              degree="Web Development Immersive"
+              year="2018"
+              icon="💻"
+            />
+
+            <EducationCard 
+              school="Istanbul Bilgi University"
+              degree="Master of Business Administration (MBA)"
+              year="2009"
+              icon="💼"
+            />
+
+            <EducationCard 
+              school="Bogazici University"
+              degree="BA in English Literature"
+              year="2006"
+              icon="📖"
+            />
+
+          </div>
+        </motion.section>
+
+      </main>
+
+      <footer className="border-t border-white/10 py-8 text-center text-slate-500 text-sm bg-black/20">
+        <p>© {new Date().getFullYear()} Banu Paksoy. Built with Next.js 15 & React Three Fiber.</p>
+      </footer>
+    </div>
+  );
+}
+
+// --- DARK MODE COMPONENTS ---
+
+function SocialBtn({ href, icon }: any) {
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full hover:bg-purple-500 hover:border-purple-500 hover:scale-110 transition-all duration-300 text-white text-xl shadow-lg"
+    >
+      {icon}
+    </a>
+  );
+}
+
+function SkillCard({ title, icon, skills }: any) {
+  return (
+    <motion.div variants={fadeInUp} className="bg-white/5 backdrop-blur-sm p-5 rounded-xl border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-colors">
+      <div className="flex items-center gap-3 mb-4 text-purple-400 text-lg">
+        {icon}
+        <h3 className="font-bold text-slate-200">{title}</h3>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {skills.map((s: string) => (
+          <span key={s} className="bg-black/40 text-slate-300 text-xs font-mono px-2 py-1 rounded border border-white/5">
+            {s}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectCard({ title, subtitle, stack, description, link, linkText, badge, color }: any) {
+  const colorClasses: any = {
+    blue: "hover:border-blue-500/50 group-hover:text-blue-400",
+    purple: "hover:border-purple-500/50 group-hover:text-purple-400",
+    pink: "hover:border-pink-500/50 group-hover:text-pink-400",
+  };
+  
+  return (
+    <motion.div 
+      variants={fadeInUp}
+      className={`group relative bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 ${colorClasses[color]} transition-all duration-300`}
+    >
+      <div className="p-8">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className={`text-2xl font-bold text-white mb-1`}>{title}</h3>
+            <p className="text-slate-400 text-sm">{subtitle}</p>
+          </div>
+          {badge && <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide border border-white/10">{badge}</span>}
+        </div>
+
+        <p className="text-slate-300 mb-6 font-light leading-relaxed">{description}</p>
+        
+        <div className="flex flex-wrap gap-2 mb-8">
+          {stack.map((tech: string) => (
+            <span key={tech} className="text-xs font-mono text-slate-400 bg-black/30 border border-white/5 px-2 py-1 rounded">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <a 
+          href={link} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="inline-block px-6 py-2 bg-white text-black font-bold text-sm rounded-full hover:bg-slate-200 transition-colors"
+        >
+          {linkText}
+        </a>
+      </div>
+    </motion.div>
+  );
+}
+
+interface ExpProps { role: string; company: string; date: string; points: string[]; }
+
+function ExperienceItem({ role, company, date, points }: ExpProps) {
+  return (
+    <div className="flex flex-col md:flex-row gap-4 md:gap-10 border-l-2 border-white/10 pl-6 relative">
+      {/* The Dot on the timeline */}
+      <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900 shadow-sm shadow-purple-500/50"></div>
+      
+      <div className="w-48 flex-shrink-0">
+        <h4 className="font-bold text-lg text-slate-200">{company}</h4>
+        <p className="text-purple-400 font-medium">{role}</p>
+        <p className="text-slate-500 text-sm mt-1">{date}</p>
+      </div>
+      
+      <ul className="list-disc list-outside ml-4 space-y-2 text-slate-300 font-light leading-relaxed marker:text-purple-500">
+        {points.map((point, index) => (
+          <li key={index}>{point}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
+function EducationCard({ school, degree, year, icon }: any) {
+  return (
+    <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-colors flex items-start gap-4">
+      <div className="bg-white/10 w-10 h-10 flex items-center justify-center rounded-full text-xl shadow-inner">
+        {icon}
+      </div>
+      <div>
+        <h4 className="font-bold text-slate-200 text-lg">{school}</h4>
+        <p className="text-purple-400 text-sm font-medium mb-1">{degree}</p>
+        <p className="text-slate-500 text-xs font-mono">{year}</p>
+      </div>
+    </div>
+  );
+}
