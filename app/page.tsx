@@ -3,14 +3,19 @@
 import { motion, Variants } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCode, FaCloud, FaDatabase, FaTools } from 'react-icons/fa';
 import ThreeBackground from './components/ThreeBackground'; // Import the 3D background
+import Typewriter from './components/Typewriter';
+import TiltCard from './components/TiltCard';
+import ScrollProgress from './components/ScrollProgress';
+import FlipCard from './components/FlipCard';
+import Image from 'next/image';
 
 // --- ANIMATION SETTINGS ---
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
   }
 };
 
@@ -25,27 +30,34 @@ const staggerContainer: Variants = {
 export default function Home() {
   return (
     <div className="min-h-screen text-slate-200 font-sans selection:bg-purple-500 selection:text-white relative">
-      
+
       {/* 1. THE 3D BACKGROUND (Fixed behind everything) */}
       <ThreeBackground />
+      <ScrollProgress />
 
       <main className="max-w-5xl mx-auto px-6 py-20 space-y-24 relative z-10">
 
         {/* --- HERO SECTION --- */}
         <header className="text-center space-y-6 pt-10">
-          <motion.div 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
           >
-            {/* Glowing Name Effect */}
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 drop-shadow-lg">
-              Banu Paksoy
-            </h1>
-            <h2 className="text-xl md:text-2xl font-light text-slate-300 mb-6">
-              Full-Stack Developer <span className="text-purple-400">/</span> Next.js <span className="text-purple-400">/</span> AI
+            {/* Glowing Name Effect with Shimmer */}
+            <div className="relative inline-block">
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-[length:200%_auto] animate-gradient drop-shadow-lg">
+                Banu Paksoy
+              </h1>
+            </div>
+
+            <h2 className="text-xl md:text-2xl font-light text-slate-300 mb-6 flex justify-center items-center gap-2">
+              <span>I am a</span>
+              <span className="text-purple-400 font-semibold">
+                <Typewriter words={['Full-Stack Developer', 'Next.js Expert', 'Cloud Architect']} />
+              </span>
             </h2>
-            
+
             <div className="flex justify-center items-center gap-2 text-slate-400 mb-8 text-sm uppercase tracking-widest">
               <FaMapMarkerAlt />
               <span>Fort Lee, NJ | Remote Ready</span>
@@ -60,34 +72,34 @@ export default function Home() {
         </header>
 
         {/* --- SUMMARY SECTION (Glass Card) --- */}
-        <motion.section 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           variants={fadeInUp}
           className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl"
         >
           <p className="text-lg md:text-xl leading-relaxed text-slate-300 font-light">
-            I am a <strong className="text-white">Full-Stack Architect</strong> specializing in scalable applications. 
-            I build production-grade systems using <strong className="text-blue-400">Next.js</strong> and <strong className="text-purple-400">NestJS</strong> on 
-            <strong className="text-yellow-400"> Google Cloud</strong>. 
-            Recently, I architected and built the e-commerce platform for <em className="text-white not-italic">Mobility on Demand</em>. 
+            I am a <strong className="text-white">Full-Stack Architect</strong> specializing in scalable applications.
+            I build production-grade systems using <strong className="text-blue-400">Next.js</strong> and <strong className="text-purple-400">NestJS</strong> on
+            <strong className="text-yellow-400"> Google Cloud</strong>.
+            Recently, I architected and built the e-commerce platform for <em className="text-white not-italic">Mobility on Demand</em>.
             I am now pushing the boundaries of <strong className="text-pink-400">Generative AI</strong> integration.
           </p>
         </motion.section>
 
         {/* --- SKILLS GRID --- */}
-        <motion.section 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           variants={staggerContainer}
         >
           <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
             <FaTools className="text-purple-400 text-xl" />
             <h2 className="text-2xl font-bold text-white">Tech Stack</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <SkillCard title="Front-End" icon={<FaCode />} skills={['React', 'Next.js', 'TypeScript', 'Tailwind', 'Framer Motion']} />
             <SkillCard title="Back-End" icon={<FaDatabase />} skills={['Node.js', 'NestJS', 'Python', 'PostgreSQL', 'Django']} />
@@ -98,10 +110,10 @@ export default function Home() {
 
         {/* --- PROJECTS SECTION --- */}
         <section>
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true }} 
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={fadeInUp}
             className="flex items-center gap-3 mb-10 border-b border-white/10 pb-4"
           >
@@ -110,9 +122,9 @@ export default function Home() {
           </motion.div>
 
           <div className="space-y-12">
-            
+
             {/* Project 1 */}
-            <ProjectCard 
+            <ProjectCard
               title="Mobility on Demand"
               subtitle="E-Commerce & Delivery Platform"
               badge="Flagship"
@@ -121,10 +133,11 @@ export default function Home() {
               link="https://shop.mod.group/"
               linkText="Visit Live App"
               color="blue"
+              image="/mobility_app.png"
             />
 
             {/* Project 2 */}
-            <ProjectCard 
+            <ProjectCard
               title="Profi Deutsch"
               subtitle="AI Language Agent"
               badge="AI / LLM"
@@ -133,10 +146,11 @@ export default function Home() {
               link="https://github.com/bpaksoy/profi-deutsch-app-2"
               linkText="View Code"
               color="purple"
+              image="/language_ai.png"
             />
 
-             {/* Project 3 */}
-             <ProjectCard 
+            {/* Project 3 */}
+            <ProjectCard
               title="Urbanitus Magazine"
               subtitle="Digital Publication"
               role="Front-End"
@@ -145,25 +159,26 @@ export default function Home() {
               link="https://urbanitus.com"
               linkText="Visit Site"
               color="pink"
+              image="/magazine_web.png"
             />
 
           </div>
         </section>
 
         {/* --- EXPERIENCE --- */}
-        <motion.section 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           variants={fadeInUp}
         >
           <h2 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">Professional History</h2>
           <div className="space-y-10">
-            
+
             {/* MOD - The New Description */}
-            <ExperienceItem 
-              role="Full Stack Developer" 
-              company="Mobility on Demand" 
+            <ExperienceItem
+              role="Full Stack Developer"
+              company="Mobility on Demand"
               date="Feb 2025 – Present"
               points={[
                 "Solely built and deployed a scalable e-commerce platform on Google Cloud Platform (GCP) using Next.js and NestJS.",
@@ -173,9 +188,9 @@ export default function Home() {
               ]}
             />
 
-            <ExperienceItem 
-              role="Front-End Web Developer" 
-              company="Urbanitus Magazine" 
+            <ExperienceItem
+              role="Front-End Web Developer"
+              company="Urbanitus Magazine"
               date="Oct 2019 – Feb 2025"
               points={[
                 "Led the digital redesign of a high-traffic magazine using WordPress and React.",
@@ -183,9 +198,9 @@ export default function Home() {
               ]}
             />
 
-             <ExperienceItem 
-              role="Teaching Assistant" 
-              company="CUNY Hunter College" 
+            <ExperienceItem
+              role="Teaching Assistant"
+              company="CUNY Hunter College"
               date="May 2018 – Jun 2018"
               points={[
                 "Supported 2X Tech Talent Pipeline bootcamp students in learning JavaScript, React, and SQLite.",
@@ -196,37 +211,37 @@ export default function Home() {
         </motion.section>
 
         {/* --- EDUCATION SECTION --- */}
-        <motion.section 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           variants={fadeInUp}
         >
           <h2 className="text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4">Education</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <EducationCard 
+
+            <EducationCard
               school="Harvard University"
               degree="CS50 Web Programming with Python & JavaScript"
               year="2023 – 2024"
               icon="🎓"
             />
-            
-            <EducationCard 
+
+            <EducationCard
               school="Galvanize / Hack Reactor"
               degree="Web Development Immersive"
               year="2018"
               icon="💻"
             />
 
-            <EducationCard 
+            <EducationCard
               school="Istanbul Bilgi University"
               degree="Master of Business Administration (MBA)"
               year="2009"
               icon="💼"
             />
 
-            <EducationCard 
+            <EducationCard
               school="Bogazici University"
               degree="BA in English Literature"
               year="2006"
@@ -249,14 +264,16 @@ export default function Home() {
 
 function SocialBtn({ href, icon }: any) {
   return (
-    <a 
-      href={href} 
-      target="_blank" 
+    <motion.a
+      href={href}
+      target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full hover:bg-purple-500 hover:border-purple-500 hover:scale-110 transition-all duration-300 text-white text-xl shadow-lg"
+      whileHover={{ scale: 1.2, rotate: 5 }}
+      whileTap={{ scale: 0.9 }}
+      className="flex items-center justify-center w-12 h-12 bg-white/5 border border-white/10 rounded-full hover:bg-purple-500 hover:border-purple-500 transition-colors duration-300 text-white text-xl shadow-lg"
     >
       {icon}
-    </a>
+    </motion.a>
   );
 }
 
@@ -278,47 +295,90 @@ function SkillCard({ title, icon, skills }: any) {
   );
 }
 
-function ProjectCard({ title, subtitle, stack, description, link, linkText, badge, color }: any) {
+function ProjectCard({ title, subtitle, stack, description, link, linkText, badge, color, image }: any) {
   const colorClasses: any = {
-    blue: "hover:border-blue-500/50 group-hover:text-blue-400",
-    purple: "hover:border-purple-500/50 group-hover:text-purple-400",
-    pink: "hover:border-pink-500/50 group-hover:text-pink-400",
+    blue: "from-blue-500/20 to-blue-600/5 border-blue-500/20 hover:border-blue-500/50",
+    purple: "from-purple-500/20 to-purple-600/5 border-purple-500/20 hover:border-purple-500/50",
+    pink: "from-pink-500/20 to-pink-600/5 border-pink-500/20 hover:border-pink-500/50",
   };
-  
-  return (
-    <motion.div 
+
+  const gradientBg: any = {
+    blue: "bg-gradient-to-br from-blue-500/30 via-blue-900/10 to-transparent",
+    purple: "bg-gradient-to-br from-purple-500/30 via-purple-900/10 to-transparent",
+    pink: "bg-gradient-to-br from-pink-500/30 via-pink-900/10 to-transparent",
+  };
+
+  const FrontContent = (
+    <motion.div
       variants={fadeInUp}
-      className={`group relative bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 ${colorClasses[color]} transition-all duration-300`}
+      className={`group relative h-full bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border ${colorClasses[color]} transition-all duration-300 flex flex-col`}
     >
-      <div className="p-8">
-        <div className="flex justify-between items-start mb-4">
+      {/* Visual Header */}
+      <div className={`h-24 w-full ${gradientBg[color]} relative overflow-hidden`}>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-colors duration-500"></div>
+
+        {/* Hint to Flip */}
+        <div className="absolute top-2 right-2 bg-black/40 backdrop-blur-md px-2 py-1 rounded text-[10px] text-white/70 font-mono border border-white/10">
+          CLICK TO FLIP ↻
+        </div>
+      </div>
+
+      <div className="p-6 flex-1 flex flex-col">
+        <div className="flex justify-between items-start mb-3">
           <div>
-            <h3 className={`text-2xl font-bold text-white mb-1`}>{title}</h3>
-            <p className="text-slate-400 text-sm">{subtitle}</p>
+            <h3 className={`text-xl font-bold text-white mb-1 group-hover:text-${color}-400 transition-colors`}>{title}</h3>
+            <p className="text-slate-400 text-xs">{subtitle}</p>
           </div>
           {badge && <span className="bg-white/10 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide border border-white/10">{badge}</span>}
         </div>
 
-        <p className="text-slate-300 mb-6 font-light leading-relaxed">{description}</p>
-        
-        <div className="flex flex-wrap gap-2 mb-8">
+        <p className="text-slate-300 mb-4 text-sm font-light leading-relaxed flex-1">{description}</p>
+
+        <div className="flex flex-wrap gap-2 mb-6">
           {stack.map((tech: string) => (
-            <span key={tech} className="text-xs font-mono text-slate-400 bg-black/30 border border-white/5 px-2 py-1 rounded">
+            <span key={tech} className="text-[10px] font-mono text-slate-400 bg-black/30 border border-white/5 px-2 py-1 rounded">
               {tech}
             </span>
           ))}
         </div>
 
-        <a 
-          href={link} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="inline-block px-6 py-2 bg-white text-black font-bold text-sm rounded-full hover:bg-slate-200 transition-colors"
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block w-full py-2 bg-white text-black font-bold text-sm rounded-lg hover:bg-slate-200 transition-colors text-center"
+          onClick={(e) => e.stopPropagation()}
         >
           {linkText}
         </a>
       </div>
     </motion.div>
+  );
+
+  const BackContent = (
+    <div className={`relative h-full w-full rounded-2xl overflow-hidden border ${colorClasses[color]}`}>
+      {/* Full Screenshot */}
+      <Image
+        src={image}
+        alt={title}
+        fill
+        className="object-cover"
+      />
+
+      {/* Subtle Gradient Overlay for readability of flip hint */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+      <div className="absolute bottom-4 left-0 right-0 text-center text-white/70 text-xs font-mono">
+        CLICK TO FLIP BACK ↺
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="h-[400px]"> {/* Reduced height */}
+      <FlipCard front={FrontContent} back={BackContent} />
+    </div>
   );
 }
 
@@ -329,13 +389,13 @@ function ExperienceItem({ role, company, date, points }: ExpProps) {
     <div className="flex flex-col md:flex-row gap-4 md:gap-10 border-l-2 border-white/10 pl-6 relative">
       {/* The Dot on the timeline */}
       <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900 shadow-sm shadow-purple-500/50"></div>
-      
+
       <div className="w-48 flex-shrink-0">
         <h4 className="font-bold text-lg text-slate-200">{company}</h4>
         <p className="text-purple-400 font-medium">{role}</p>
         <p className="text-slate-500 text-sm mt-1">{date}</p>
       </div>
-      
+
       <ul className="list-disc list-outside ml-4 space-y-2 text-slate-300 font-light leading-relaxed marker:text-purple-500">
         {points.map((point, index) => (
           <li key={index}>{point}</li>
