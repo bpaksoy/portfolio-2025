@@ -46,7 +46,7 @@ export default function Typewriter({ words, speed = 100, pause = 2000 }: Typewri
   }, [subIndex, index, reverse, words, pause]);
 
   return (
-    <span className="inline-block min-w-[200px] text-left">
+    <span className="inline-block min-w-[160px] sm:min-w-[200px] text-left">
       {words[index].substring(0, subIndex)}
       <motion.span
         animate={{ opacity: [0, 1, 0] }}
