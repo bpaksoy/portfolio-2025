@@ -132,7 +132,7 @@ export default function Home() {
             <SkillCard title="Front-End" icon={<FaCode />} skills={['React', 'Next.js', 'TypeScript', 'Tailwind', 'Framer Motion']} />
             <SkillCard title="Back-End" icon={<FaDatabase />} skills={['Node.js', 'NestJS', 'Python', 'PostgreSQL', 'Django']} />
             <SkillCard title="Cloud & AI" icon={<FaCloud />} skills={['GCP', 'Firebase', 'Azure AI', 'Gemini API', 'Docker', 'CI/CD']} />
-            <SkillCard title="Workflow" icon={<FaTools />} skills={['Git', 'Figma', 'VS Code', 'Jira', 'Postman']} />
+            <SkillCard title="Workflow" icon={<FaTools />} skills={['Git', 'Figma', 'VS Code', 'Jira', 'Postman', 'Postico']} />
           </div>
         </motion.section>
 
@@ -203,7 +203,7 @@ export default function Home() {
               link="https://urbanitus.com"
               linkText="Visit Site"
               color="pink"
-              image="/magazine_web.png"
+              image="/Urbanitus.png"
             />
 
           </div>
@@ -326,7 +326,7 @@ function SocialBtn({ href, icon }: any) {
 
 function SkillCard({ title, icon, skills }: any) {
   return (
-    <TiltCard>
+    <TiltCard className="h-full">
       <motion.div variants={fadeInUp} className="bg-white/5 backdrop-blur-sm p-5 rounded-xl border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-colors h-full">
         <div className="flex items-center gap-3 mb-4 text-purple-400 text-lg">
           {icon}
