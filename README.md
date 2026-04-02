@@ -4,7 +4,7 @@ A modern, interactive personal portfolio built with **Next.js**, **React Three F
 
 ## Live Site
 
-Deployed and hosted at: [banu-portfolio](https://github.com/bpaksoy/portfolio-2025)
+Deployed and hosted at: [banupaksoy.com](https://banupaksoy.com/)
 
 ## Features
 
