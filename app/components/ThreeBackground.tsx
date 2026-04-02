@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as random from 'maath/random';
@@ -31,12 +31,14 @@ function StarField(props: any) {
   );
 }
 
-export default function ThreeBackground() {
+const ThreeBackground = memo(function ThreeBackground() {
   return (
     <div className="fixed top-0 left-0 w-full h-full -z-10 bg-slate-950">
-      <Canvas camera={{ position: [0, 0, 1] }}>
+      <Canvas camera={{ position: [0, 0, 1] }} style={{ pointerEvents: 'none' }}>
         <StarField />
       </Canvas>
     </div>
   );
-}
+});
+
+export default ThreeBackground;

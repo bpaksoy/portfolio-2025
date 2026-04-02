@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaUser, FaCode, FaBriefcase, FaGraduationCap, FaRocket, FaChartBar } from 'react-icons/fa';
 
@@ -18,8 +18,17 @@ export default function FloatingNav() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateActiveSection = () => {
       setIsVisible(window.scrollY > 300);
+
+      // If at the bottom of the page, highlight last section
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 100) {
+        setActiveSection(sections[sections.length - 1].id);
+        ticking = false;
+        return;
+      }
 
       const sectionElements = sections.map(s => ({
         id: s.id,
@@ -35,6 +44,14 @@ export default function FloatingNav() {
             break;
           }
         }
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateActiveSection);
       }
     };
 
