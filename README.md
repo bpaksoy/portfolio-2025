@@ -2,6 +2,10 @@
 
 A modern, interactive personal portfolio built with **Next.js**, **React Three Fiber**, **Framer Motion**, and **Tailwind CSS**. Features a 3D starfield background, animated UI components, and a fully responsive design.
 
+## Why Next.js?
+
+I chose Next.js for its hybrid rendering capabilities to ensure fast initial loads for my portfolio while maintaining dynamic project updates.
+
 ## Live Site
 
 Deployed and hosted at: [banupaksoy.com](https://banupaksoy.com/)
